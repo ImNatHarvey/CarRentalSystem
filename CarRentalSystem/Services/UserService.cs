@@ -17,6 +17,11 @@ namespace CarRentalSystem.Services
             _userRepository = new UserRepository();
         }
 
+        public UserModel GetUserByUsername(string username)
+        {
+            return _userRepository.GetUserByUsername(username);
+        }
+
         // Fulfills AUT001 & AUT005: Authenticates the user and sets the active session
         public bool AuthenticateUser(string username, string rawPassword)
         {

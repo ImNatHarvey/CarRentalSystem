@@ -3,7 +3,8 @@ using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using FluentMigrator.Runner;
 using CarRentalSystem.Forms;
-using CarRentalSystem.Database; 
+using CarRentalSystem.Database;
+using CarRentalSystem.Services; // Added to access UserService
 
 namespace CarRentalSystem
 {
@@ -24,11 +25,13 @@ namespace CarRentalSystem
                 UpdateDatabase(scope.ServiceProvider);
             }
 
-            // 3. Launch the App
+            // 3. Seed the Default Admin Account
+            SeedDefaultOwner();
+
+            // 4. Launch the App (We will change this to LoginForm later!)
             Application.Run(new MainForm());
         }
 
-        // Configures the migration runner to look for your SQL connection and Migration classes
         private static IServiceProvider CreateServices()
         {
             return new ServiceCollection()
@@ -36,17 +39,36 @@ namespace CarRentalSystem
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(DatabaseConfig.ConnectionString)
-                    // Scans your current project for any classes labeled with [Migration]
                     .ScanIn(typeof(Program).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
 
-        // Executes the migrations up to the latest version
         private static void UpdateDatabase(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
             runner.MigrateUp();
+        }
+
+        // Creates the initial owner account if it doesn't already exist
+        private static void SeedDefaultOwner()
+        {
+            var userService = new UserService();
+            
+            // Check if the account already exists so we don't crash on multiple runs
+            var existingOwner = userService.GetUserByUsername("NatarakiCar");
+            
+            if (existingOwner == null)
+            {
+                // RegisterUser automatically hashes "Nataraki2026" before saving it to SSMS
+                userService.RegisterUser(
+                    username: "NatarakiCar", 
+                    rawPassword: "Nataraki2026", 
+                    role: "Owner", 
+                    firstName: "System", 
+                    lastName: "Owner"
+                );
+            }
         }
     }
 }
