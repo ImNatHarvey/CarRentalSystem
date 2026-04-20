@@ -13,8 +13,6 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
             this.txtUsername = new ReaLTaiizor.Controls.HopeTextBox();
@@ -23,7 +21,18 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSubtitle = new System.Windows.Forms.Label();
             this.lblClose = new System.Windows.Forms.Label();
+            this.pnlTopBorder = new System.Windows.Forms.Panel();
             this.SuspendLayout();
+            // 
+            // pnlTopBorder
+            // 
+            this.pnlTopBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.pnlTopBorder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTopBorder.Location = new System.Drawing.Point(0, 0);
+            this.pnlTopBorder.Name = "pnlTopBorder";
+            this.pnlTopBorder.Size = new System.Drawing.Size(390, 5);
+            this.pnlTopBorder.TabIndex = 6;
+            this.pnlTopBorder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DragForm_MouseDown);
             // 
             // lblClose
             // 
@@ -31,7 +40,7 @@
             this.lblClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
-            this.lblClose.Location = new System.Drawing.Point(360, 10);
+            this.lblClose.Location = new System.Drawing.Point(360, 15);
             this.lblClose.Name = "lblClose";
             this.lblClose.Size = new System.Drawing.Size(20, 21);
             this.lblClose.TabIndex = 0;
@@ -43,7 +52,7 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
-            this.lblTitle.Location = new System.Drawing.Point(38, 50);
+            this.lblTitle.Location = new System.Drawing.Point(38, 55);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(270, 37);
             this.lblTitle.TabIndex = 1;
@@ -55,7 +64,7 @@
             this.lblSubtitle.AutoSize = true;
             this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(42, 90);
+            this.lblSubtitle.Location = new System.Drawing.Point(42, 95);
             this.lblSubtitle.Name = "lblSubtitle";
             this.lblSubtitle.Size = new System.Drawing.Size(149, 19);
             this.lblSubtitle.TabIndex = 2;
@@ -71,7 +80,7 @@
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
             this.txtUsername.Hint = "Username";
-            this.txtUsername.Location = new System.Drawing.Point(45, 150);
+            this.txtUsername.Location = new System.Drawing.Point(45, 155);
             this.txtUsername.MaxLength = 50;
             this.txtUsername.Multiline = false;
             this.txtUsername.Name = "txtUsername";
@@ -94,7 +103,7 @@
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
             this.txtPassword.Hint = "Password";
-            this.txtPassword.Location = new System.Drawing.Point(45, 210);
+            this.txtPassword.Location = new System.Drawing.Point(45, 215);
             this.txtPassword.MaxLength = 50;
             this.txtPassword.Multiline = false;
             this.txtPassword.Name = "txtPassword";
@@ -118,7 +127,7 @@
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnLogin.HoverTextColor = System.Drawing.Color.White;
             this.btnLogin.InfoColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(147)))), ((int)(((byte)(153)))));
-            this.btnLogin.Location = new System.Drawing.Point(45, 290);
+            this.btnLogin.Location = new System.Drawing.Point(45, 295);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
             this.btnLogin.Size = new System.Drawing.Size(300, 45);
@@ -135,6 +144,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(390, 400);
+            this.Controls.Add(this.pnlTopBorder);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
@@ -151,13 +161,12 @@
 
         }
 
-        #endregion
-
         private ReaLTaiizor.Controls.HopeTextBox txtUsername;
         private ReaLTaiizor.Controls.HopeTextBox txtPassword;
         private ReaLTaiizor.Controls.HopeButton btnLogin;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubtitle;
         private System.Windows.Forms.Label lblClose;
+        private System.Windows.Forms.Panel pnlTopBorder;
     }
 }

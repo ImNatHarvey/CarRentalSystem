@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
 using CarRentalSystem.Services;
 
 namespace CarRentalSystem.Forms
@@ -58,26 +59,43 @@ namespace CarRentalSystem.Forms
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
+            // 1. Validation Check (Now a True, Bold Red)
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Please enter both a username and password.", "Required Fields", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CustomMessageBox.Show(
+                    "Please enter both a username and password.",
+                    "Required Fields",
+                    IconChar.ExclamationTriangle,
+                    Color.FromArgb(220, 53, 69) // True Danger Red
+                );
                 return;
             }
 
             // Calls the secure BCrypt authentication logic
             bool isSuccess = _userService.AuthenticateUser(username, password);
 
+            // 2. Success Check (Electric Blue)
             if (isSuccess)
             {
                 // AUT005 Validated: Alert the user of success and their role
-                MessageBox.Show($"Welcome back, {UserService.CurrentUser.FullName}!\nRole: {UserService.CurrentUser.Role}",
-                                "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CustomMessageBox.Show(
+                    $"Welcome back, {UserService.CurrentUser.FullName}!\nRole: {UserService.CurrentUser.Role}",
+                    "Login Successful",
+                    IconChar.InfoCircle,
+                    Color.FromArgb(37, 99, 235) // Electric Blue
+                );
 
                 // TODO: Open the 1280x720 Overview Dashboard here
             }
+            // 3. Failure Check (True, Bold Red)
             else
             {
-                MessageBox.Show("Invalid username or password. Please try again.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBox.Show(
+                    "Invalid username or password. Please try again.",
+                    "Authentication Failed",
+                    IconChar.ExclamationCircle,
+                    Color.FromArgb(220, 53, 69) // True Danger Red
+                );
                 txtPassword.Text = string.Empty; // Clear password on failure
                 txtPassword.Focus();
             }
